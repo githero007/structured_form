@@ -43,7 +43,12 @@ router.post('/submit', async (req, res) => {
     console.log(req.body);
 
     try {
-        const updatedForm = await Form.findOneAndReplace({ _id: formId }, form);
+        const updatedForm = await Form.findByIdAndUpdate(
+            formId,
+            { fields: form }, // a small mistake was here where i was trying to send an entire file lol
+            { new: true }
+        );
+
         if (!updatedForm) {
             return res.status(400).json({ error: " the form isnot available it has been deleted or expired" })
         }

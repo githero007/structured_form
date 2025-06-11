@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import socket from "./Socket";
 function FormRender() {
     const [fields, setFields] = useState([]);
     const [formid, setFormid] = useState();
     const [ans, setAns] = useState();
     const [flag, setFlag] = useState(0);
+
     let fetchedFields;
     const handleForm = async () => {
         console.log(formid);
@@ -16,14 +18,21 @@ function FormRender() {
                 setFields(fetchedFields);
                 console.log(fields);
                 setFlag(1);
+                socket.emit("joinForm", formid);
             }).catch(function (error) {
                 console.log(error);
             })
     }
+    socket.on('realChanges', async (answer, index) => {
+        const updated = [...fields];
+        updated[index].answer = answer;
+        setFields(updated);
+    })
     const handleAnswer = async (answer, index) => {
         const updated = [...fields];
+        socket.emit('editField', answer, index);
         console.log(index);
-        updated[index].answer = answer;
+        updated[index].answer = ans;
         setFields(updated);
     }
     const handleSubmit = async () => {

@@ -1,14 +1,22 @@
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
 const router = require('./routes/route');
-const io = require('socket.io')(server);
 const connectToMongo = require('./db');
 const User = require('./models/user');
 const bcrypt = require('bcrypt');
 const connectRedis = require('./redis');
 const formHandler = require('./sockethandlers/formHandler')
 const cors = require('cors');
+const { createServer } = require('node:http');
+const { Server } = require('socket.io');
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:5173', // your React app origin
+        methods: ['GET', 'POST'],
+        credentials: true,
+    }
+})
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
@@ -67,8 +75,8 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 })
-io.on('connection', () => {
-    formHandler(io, Socket, client);
+io.on('connection', (socket) => {
+    formHandler(io, socket, client);
 });
 server.listen(3000, () => {
     console.log("server is running on port 3000")
