@@ -26,6 +26,18 @@ function FormRender() {
         updated[index].answer = answer;
         setFields(updated);
     }
+    const handleSubmit = async () => {
+        await axios.post('http://localhost:3000/submit', {
+            formId: formid,
+            form: fields
+        }).then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        })
+
+
+    }
     return (<>
         {flag == 0 && (<div className="getForm">
             <input type="text"
@@ -52,7 +64,7 @@ function FormRender() {
 
             )}
         </>)}
-        <button>Submit Form</button>
+        <button onClick={handleSubmit}>Submit Form</button>
     </>)
 
 }

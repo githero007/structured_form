@@ -40,14 +40,16 @@ router.post('/getform', async (req, res) => {
 })
 router.post('/submit', async (req, res) => {
     const { formId, form } = req.body;
-    const updatedForm = await Form.findByIdAndUpdate(formId, form);
+    console.log(req.body);
+
     try {
+        const updatedForm = await Form.findOneAndReplace({ _id: formId }, form);
         if (!updatedForm) {
             return res.status(400).json({ error: " the form isnot available it has been deleted or expired" })
         }
         res.status(200).json({ success: "the form has been submitted and sent to Database" })
     } catch (error) {
-        console.log(error);
+        console.log(error, 'the following error has occured');
         res.status(500).json({ error: "the required operation couldnt be perfomed" })
     }
 
