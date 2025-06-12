@@ -50,7 +50,7 @@ app.post('/signin', async (req, res) => {
         });
 
         await user.save();
-        res.status(201).json({ message: "User registered successfully" });
+        res.status(201).json({ message: "User registered successfully", userId: user._id, username: user.name });
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: "Server error" });
@@ -69,7 +69,7 @@ app.post('/login', async (req, res) => {
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ error: "Invalid credentials" });
-        res.json({ userId: user._id });
+        res.json({ userId: user._id, username: user.name });
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: "Server error" });

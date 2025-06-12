@@ -6,6 +6,7 @@ function FormRender() {
     const [formid, setFormid] = useState();
     const [ans, setAns] = useState();
     const [flag, setFlag] = useState(0);
+    const userId = localStorage.getItem("userId");
 
     let fetchedFields;
     const handleForm = async () => {
@@ -28,11 +29,12 @@ function FormRender() {
         updated[index].answer = answer;
         setFields(updated);
     })
-    const handleAnswer = async (answer, index) => {
+    const handleAnswer = async (answer, index, questionId) => {
         const updated = [...fields];
-        socket.emit('editField', answer, index);
+        console.log(userId);
+        socket.emit('editField', answer, index, questionId, userId);
         console.log(index);
-        updated[index].answer = ans;
+        updated[index].answer = answer;
         setFields(updated);
     }
     const handleSubmit = async () => {
@@ -44,9 +46,17 @@ function FormRender() {
         }).catch(function (error) {
             console.log(error);
         })
-
-
     }
+    const handleLock = async (questionId) => {
+        console.log('questionId has been locked', questionId);
+        socket.emit('lockField', questionId, userId);
+    }
+    socket.on('lockenable', async (changes, index) => {
+        const update = [...fields];
+        update[index][answer] = changes;
+        setField(update);
+    })
+
     return (<>
         {flag == 0 && (<div className="getForm">
             <input type="text"
@@ -66,8 +76,9 @@ function FormRender() {
                         <input type="text"
                             placeholder="enter your answer"
                             value={question.answer}
-                            onChange={(e) => handleAnswer(e.target.value, index)}
+                            onChange={(e) => handleAnswer(e.target.value, index, question._id)}
                             name="" id="" />
+                        <button onClick={e => handleLock(question._id)}> lock option</button>
                     </div>)
             }
 

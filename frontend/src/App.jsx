@@ -5,6 +5,7 @@ import './App.css'
 import Login from './components/LogIn'
 import FormBuilder from './components/FormBuilder'
 import FormRender from './components/FormRender'
+import Signin from './components/SignIn'
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <>
+      <Signin />
       <FormBuilder></FormBuilder>
       <FormRender />
     </>

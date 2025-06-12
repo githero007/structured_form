@@ -17,6 +17,8 @@ function Login() {
             const userId = response.data.userId;
             localStorage.setItem("userId", userId);
             const checking = localStorage.getItem("userId");
+            const username = response.data.username;
+            localStorage.setItem("username", username);
             console.log(checking);
         })
             .catch(function (error) {
@@ -32,4 +34,4 @@ function Login() {
             <button onClick={handleLogin}>Login</button>
         </>)
 }
-export default Login;
+export default Login; 

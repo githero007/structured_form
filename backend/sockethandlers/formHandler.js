@@ -6,18 +6,32 @@ const FormHandler = (io, socket, client) => {
         formID = formId
         socket.join(formId);
     });
-    socket.on('editField', async (changes, index) => {
-        console.log(changes);
-        socket.to(formID).emit('realChanges', changes, index);
+    socket.on('editField', async (changes, index, questionId, userId) => {
+        const isLocked = await client.get(questionId);
+        console.log(isLocked);
+        if (isLocked == null) {
+            console.log(changes);
+            socket.to(formID).emit('realChanges', changes, index);
+            return;
+        }
+        else if (isLocked == userId) {
+            socket.to(formID).emit('realChanges', changes, index);
+        }
+        else
+            socket.to(formID).emit('lockenable', 'the field has been locked', questionId);
+
     });
-    socket.on('lockField', async (questionId) => {
+    socket.on('lockField', async (questionId, userId) => {
+        if (questionId == null) return ("some error has occured");
+        console.log(questionId, 'questionId');
+        console.log(userId, 'userId');
         const fieldStatus = await client.get(questionId);
-        if (fieldStatus == null) {
+        if (fieldStatus) {
             console.log('the socket has been locked already');
             socket.to(formID).emit("fieldlocked", 'the field has been locked by')//username)
             return;
         }
-        const lock = await client.set(questionId, socket.id);
+        const lock = await client.set(questionId, userId);
         await client.expire(questionId, 360);
 
     })
