@@ -73,16 +73,30 @@ function FormRender() {
                 return (
                     <div key={index}>
                         <h4>{question.question}</h4>
-                        <input type="text"
-                            placeholder="enter your answer"
-                            value={question.answer}
-                            onChange={(e) => handleAnswer(e.target.value, index, question._id)}
-                            name="" id="" />
+                        {question.type === "dropdown" ? (
+                            <select
+                                value={question.answer}
+                                onChange={(e) => handleAnswer(e.target.value, index, question._id)}
+                            >
+                                <option value="">Select an option</option>
+                                {question.options?.map((option, i) => (
+                                    <option key={i} value={option}>{option}</option>
+                                ))}
+                            </select>
+                        ) : (
+                            <input
+                                type="text"
+                                placeholder="enter your answer"
+                                value={question.answer}
+                                onChange={(e) => handleAnswer(e.target.value, index, question._id)}
+                                name="" id=""
+                            />
+                        )}
                         <button onClick={e => handleLock(question._id)}> lock option</button>
-                    </div>)
-            }
+                    </div>
+                )
+            })}
 
-            )}
         </>)}
         <button onClick={handleSubmit}>Submit Form</button>
     </>)
