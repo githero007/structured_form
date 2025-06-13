@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import socket from "./Socket";
 import { Link, useNavigate } from "react-router";
+import { z } from 'zod';
 import '../css/FormRender.css'
 function FormRender() {
     const [fields, setFields] = useState([]);
@@ -74,11 +75,11 @@ function FormRender() {
             {fields.map((question, index) => {
                 return (
                     <div key={index}>
-                        <h4>{question.question}</h4>
+                        <h4>{question.question}(expected response ={question.type})</h4>
                         {question.type === "dropdown" ? (
                             <select
                                 value={question.answer}
-                                onChange={(e) => handleAnswer(e.target.value, index, question._id)}
+                                onChange={(e) => handleAnswer(e.target.value, index, question._id, question.type)}
                             >
                                 <option value="">Select an option</option>
                                 {question.options?.map((option, i) => (
@@ -90,7 +91,7 @@ function FormRender() {
                                 type="text"
                                 placeholder="enter your answer"
                                 value={question.answer}
-                                onChange={(e) => handleAnswer(e.target.value, index, question._id)}
+                                onChange={(e) => handleAnswer(e.target.value, index, question._id, question.type)}
                                 name="" id=""
                             />
                         )}
