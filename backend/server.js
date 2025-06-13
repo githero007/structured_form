@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const router = require('./routes/route');
+const path = require('path');
 const connectToMongo = require('./db');
 const User = require('./models/user');
 const bcrypt = require('bcrypt');
@@ -18,6 +19,7 @@ const io = new Server(server, {
     }
 })
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.json());
 app.use('/', router);
 connectToMongo();
@@ -75,6 +77,20 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: "Server error" });
     }
 })
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+app.get('/render', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
+
+app.get('/build', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
+
 io.on('connection', (socket) => {
     formHandler(io, socket, client);
 });
