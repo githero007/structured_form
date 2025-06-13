@@ -1,0 +1,115 @@
+/* Google Forms–style for FormRender */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Wrapper Container */
+.form-render-wrapper {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Title */
+.form-render-wrapper h2 {
+    color: #202124;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Input for Form ID */
+.getForm input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.getForm button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.getForm button:hover {
+    background-color: #185abc;
+}
+
+/* Each Question Block */
+.form-question {
+    margin-bottom: 30px;
+}
+
+.form-question h4 {
+    margin-bottom: 8px;
+    color: #202124;
+    font-weight: 500;
+}
+
+/* Text input for answers */
+.form-question input[type="text"],
+.form-question select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 6px;
+    background-color: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.form-question input:focus,
+.form-question select:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 1px #1a73e8;
+}
+
+/* Lock Button */
+.lock-button {
+    background-color: #d93025;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lock-button:hover {
+    background-color: #c5221f;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 30px auto 0 auto;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #185abc;
+}

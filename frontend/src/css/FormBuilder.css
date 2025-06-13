@@ -1,0 +1,112 @@
+/* FormRender.css */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f3f4;
+}
+
+/* Wrapper */
+.form-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Initial form ID input section */
+.getForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.getForm input[type="text"] {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.getForm button {
+    padding: 10px 18px;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.getForm button:hover {
+    background-color: #185abc;
+}
+
+/* Each question block */
+.form-container>div {
+    margin-bottom: 24px;
+}
+
+.form-container h4 {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #202124;
+}
+
+/* Inputs and selects */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    font-size: 16px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 1px #1a73e8;
+}
+
+/* Lock Button */
+button:not(.submit-btn):not(.getForm button) {
+    background-color: #ea4335;
+    color: white;
+    padding: 8px 14px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 5px;
+}
+
+button:not(.submit-btn):not(.getForm button):hover {
+    background-color: #c5221f;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    margin: 30px auto 0 auto;
+    background-color: #1a73e8;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #185abc;
+}

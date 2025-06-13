@@ -1,23 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Login from './components/LogIn'
-import FormBuilder from './components/FormBuilder'
-import FormRender from './components/FormRender'
-import Signin from './components/SignIn'
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './components/LogIn';
+import FormBuilder from './components/FormBuilder';
+import FormRender from './components/FormRender';
+import SignIn from './components/SignIn'
 function App() {
-
-
   return (
-    <>
-      <Signin />
-      <FormBuilder></FormBuilder>
-      <FormRender />
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/build" element={<FormBuilder />} />
+        <Route path="/render" element={<FormRender />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

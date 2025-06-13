@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import socket from "./Socket";
+import { Link, useNavigate } from "react-router";
+import '../css/FormRender.css'
 function FormRender() {
     const [fields, setFields] = useState([]);
     const [formid, setFormid] = useState();
     const [ans, setAns] = useState();
     const [flag, setFlag] = useState(0);
     const userId = localStorage.getItem("userId");
-
+    const navigate = useNavigate();
     let fetchedFields;
     const handleForm = async () => {
         console.log(formid);
@@ -57,7 +59,7 @@ function FormRender() {
         setField(update);
     })
 
-    return (<>
+    return (<div className="form-container">
         {flag == 0 && (<div className="getForm">
             <input type="text"
                 value={formid}
@@ -98,8 +100,9 @@ function FormRender() {
             })}
 
         </>)}
-        <button onClick={handleSubmit}>Submit Form</button>
-    </>)
+        <button className="submit-btn" onClick={handleSubmit}>SubmitForm</button>
+
+    </div>)
 
 }
 export default FormRender;

@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router';
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
     const handleLogin = () => {
         console.log(email, password);
+        if (email == '' || password == '') {
+            alert("please enter all the details required");
+            return;
+        }
         axios.post('http://localhost:3000/login', {
             email: email,
             password: password
@@ -20,6 +27,8 @@ function Login() {
             const username = response.data.username;
             localStorage.setItem("username", username);
             console.log(checking);
+            navigate('/build')
+
         })
             .catch(function (error) {
                 console.log(error);
@@ -27,11 +36,13 @@ function Login() {
     }
     return (
         <>
-            <label>Enter your email <input type="email" value={email} onChange={e => setEmail(e.target.value)} name="" id="" /></label>
+            <label>Enter your email <input type="text" value={email} onChange={e => setEmail(e.target.value)} name="" id="" /></label>
             <br></br>
             <label>Enter your password <input type="text" value={password} onChange={e => setPassword(e.target.value)} name="" id="" /></label>
             <br></br>
             <button onClick={handleLogin}>Login</button>
+            <br></br>
+            Dont have an account <Link to="/">SignIn</Link>
         </>)
 }
 export default Login; 

@@ -36,7 +36,7 @@ app.post('/signin', async (req, res) => {
     if (!name || !email || !password)
         return res.status(400).json({ error: "All fields are required" });
     try {
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: email });
 
         if (existingUser)
             return res.status(409).json({ error: "Email already registered" });
