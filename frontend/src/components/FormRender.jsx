@@ -14,7 +14,7 @@ function FormRender() {
     let fetchedFields;
     const handleForm = async () => {
         console.log(formid);
-        await axios.post('http://localhost:3000/getform', {
+        await axios.post('https://structured-form.onrender.com/getform', {
             formId: formid
         })
             .then(function (response) {
@@ -41,7 +41,7 @@ function FormRender() {
         setFields(updated);
     }
     const handleSubmit = async () => {
-        await axios.post('http://localhost:3000/submit', {
+        await axios.post('https://structured-form.onrender.com/submit', {
             formId: formid,
             form: fields
         }).then(function (response) {

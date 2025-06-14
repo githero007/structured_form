@@ -30,7 +30,7 @@ function FormBuilder() {
         setFields(updatedFields);
     }
     const handleSubmit = async () => {
-        await axios.post('http://localhost:3000/createForm', {
+        await axios.post('https://structured-form.onrender.com/createForm', {
             userId: userId,
             title: title,
             fields: fields
