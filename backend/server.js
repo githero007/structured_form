@@ -13,8 +13,8 @@ const { Server } = require('socket.io');
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173', // your React app origin
-        methods: ['GET', 'POST'],
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT'],
         credentials: true,
     }
 })
